@@ -1,0 +1,105 @@
+﻿@model CourseAddViewModel
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active"> Panel</li>
+                        <li class="breadcrumb-item active"> Categories</li>
+
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                                    <div class="col-sm-12">
+                                        <form enctype="multipart/form-data" method="post" action="/course/add">
+                                            <div class="card-body">
+                                                @*<div asp-validation-summary="All" class="text-danger"></div>*@
+
+                                                <div class="form-group">
+                                                    <label>Name</label>
+
+                                                    <input asp-for="@Model.Title" type="tel" class="form-control" placeholder="Enter name">
+                                                    <span asp-validation-for="@Model.Title" class="text-danger"></span>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Description</label>
+                                                    <textarea asp-for="@Model.Description" type="te " class="form-control" placeholder="Enter description"></textarea>
+                                                    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Tags</label>
+                                                    <textarea asp-for="@Model.Tags" type="te " class="form-control" placeholder="Enter tags"></textarea>
+                                                    <span asp-validation-for="@Model.Tags" class="text-danger"></span>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>File input</label>
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input asp-for="@Model.FileResource" type="file" class="custom-file-input" id="exampleInputFile">
+                                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                            <span asp-validation-for="@Model.FileResource" class="text-danger"></span>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <span asp-validation-for="@Model.Categories" class="text-danger"></span>
+                                                    <label>Category</label>
+
+                                                    <select asp-for="CategoryId" id="myselect" asp-items="@(new SelectList(Model.Categories,"Id","Name"))" class="form-control" placeholder="">
+                                                        <option>Select category</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-check">
+                                                    <input asp-for="@Model.IsPopular" type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                    <label class="form-check-label" for="exampleCheck1">Is popular ?</label>
+                                                </div>
+                                            </div>
+                                            <!-- /.card-body -->
+
+                                            <div class="card-footer">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

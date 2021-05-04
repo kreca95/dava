@@ -1,0 +1,90 @@
+﻿@model CourseSearchViewModel
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="hero-area3 hero-overly2 d-flex align-items-center ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-9">
+                <div class="hero-cap text-center pt-50 pb-20">
+                    <h2>Our Listing</h2>
+                </div>
+                <!--Hero form -->
+                <form action="/course/search" class="search-box search-box2">
+                    <div class="input-form">
+                        <input asp-for="Tags" type="text" placeholder="What are you looking for?">
+                    </div>
+                    <div class="select-form">
+                        <div class="select-itms">
+                            <select asp-items="@(new SelectList(Model.Categories,"Id","Name"))" id="select1" style="display: none;" asp-for="CategoryId">
+                                <option value="">All categories</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Search box -->
+                    <div class="search-form">
+                        <button class="btn btn-info">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="listing-area pt-120 pb-120">
+    <div class="container">
+        <div class="row">
+            <!-- Left content -->
+            <!-- Right content -->
+            <div class="col-md-12">
+                @if (Model.Courses != null)
+                {
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="count mb-35">
+                                <span>@Model.Courses.Count courses found</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- listing Details Stat-->
+                <div class="listing-details-area">
+                    <div class="container">
+                        <div class="row">
+                            @if (Model.Courses != null)
+                            {
+                                @foreach (var item in Model.Courses)
+                                {
+                                    <div class="col-lg-6 ">
+                                        <div class="single-listing mb-30">
+                                            <div class="list-img">
+                                                <img src="/files/@item.ImageUrl" alt="">
+                                                <!-- <span>Open</span> -->
+                                            </div>
+                                            <div class="list-caption">
+                                                <span>Open</span>
+                                                <h3><a href="listing_details.html">@item.Name</a></h3>
+                                                <p>@item.Description</p>
+                                                <div class="list-footer">
+                                                    <ul>
+                                                        <li>Video count: @item.VideoCount</li>
+                                                        <li>@item.Tags</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <!-- listing Details End -->
+
+            </div>
+        </div>
+    </div>
+</div>

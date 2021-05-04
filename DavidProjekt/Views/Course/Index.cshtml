@@ -1,0 +1,127 @@
+﻿@model List<CourseViewModel>
+@{
+    Layout = "../Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active"> Panel</li>
+                        <li class="breadcrumb-item active"> Courses</li>
+
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <a class="btn btn-info" href="/course/add">Add Course</a>
+                            <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Name</th>
+                                                    <th>Image</th>
+                                                    <th>Tags</th>
+                                                    <th>Video count</th>
+                                                    <th>Video duration</th>
+                                                    <th>Category</th>
+                                                    <th>Lectures</th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr class="odd">
+                                                        <td class="dtr-control sorting_1" tabindex="0">@item.Name</td>
+                                                        @if (!string.IsNullOrEmpty(@item.ImageUrl))
+                                                        {
+                                                            <td><a href="/files/@item.ImageUrl" target="_blank">Image</a></td>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <td><a>No image</a></td>
+
+                                                        }
+                                                        <td>@item.Tags</td>
+                                                        <td>@item.VideoCount</td>
+                                                        <td>@item.Duration</td>
+                                                        <td>@item.Category</td>
+
+                                                        <td><a href="/lecture/@item.Id">Lectures</a> </td>
+
+                                                        <td><a href="#" class="delete" data-id="@item.Id">Delete</a></td>
+                                                        <td><a href="/course/edit/@item.Id">Edit</a></td>
+                                                    </tr>
+                                                }
+
+
+                                            </tbody>
+                                            @*<tfoot>
+                                                    <tr>
+                                                        <th rowspan="1" colspan="1">Name</th>
+                                                        <th rowspan="1" colspan="1">Delete</th>
+                                                        <th rowspan="1" colspan="1">Edit</th>
+                                                    </tr>
+                                                </tfoot>*@
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script src="~/assets/js/vendor/jquery-1.12.4.min.js">
+</script>
+
+<script>
+    $(".delete").click((e) => {
+        var check = confirm("Are you sure ?");
+        if (check) {
+            var id = (e.currentTarget.attributes[2].value);
+            console.log(id);
+            $.ajax({
+                url: "/course/delete/" + id,
+                method: "DELETE",
+                success: (result) => {
+                    alert("Course deleted.");
+                    location.reload();
+                },
+                error: (err) => {
+                    alert("Error.");
+                }
+            });
+        }
+    });
+</script>

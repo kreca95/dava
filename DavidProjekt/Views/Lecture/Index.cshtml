@@ -1,0 +1,143 @@
+﻿@model List<LectureViewModel>
+@{
+    Layout = "../Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active"> Panel</li>
+                        <li class="breadcrumb-item active"> Categories</li>
+
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <a class="btn btn-info" href="/lecture/add/@Model.FirstOrDefault().CourseId">Add lecture</a>
+                            <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
+                                    <div class="col-sm-12">
+                                        <form action="/lecture/order" method="post">
+                                            <table id="dataTable" class="table table-bordered dataTable table-hover dataTable dtr-inline sort" role="grid" cellpadding="0" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="index">Order number</th>
+                                                        <th>Name</th>
+                                                        <th>Image</th>
+                                                        <th>Video duration</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @for (int i = 0; i < Model.Count; i++)
+                                                    {
+                                                        <tr class="odd">
+                                                            <td><input class="index" asp-for="@Model[i].OrderNum" /></td>
+                                                            <input asp-for="@Model[i].Id" class="text-hide" />
+                                                            <input asp-for="@Model[i].CourseId" class="text-hide" />
+                                                            <td class="dtr-control sorting_1" tabindex="0">@Model[i].Title</td>
+                                                            @if (!string.IsNullOrEmpty(Model[i].ImageUrl))
+                                                            {
+                                                                <td><a href="/files/@Model[i].ImageUrl" target="_blank">Image</a></td>
+
+                                                            }
+                                                            else
+                                                            {
+                                                                <td><a>No image</a></td>
+
+                                                            }
+                                                            <td>@Model[i].Length</td>
+                                                            <td><a href="" class="delete" data-id="@Model[i].Id">Delete</a></td>
+                                                            <td><a href="/lecture/edit/@Model[i].Id">Edit</a></td>
+                                                        </tr>
+                                                    }
+
+
+                                                </tbody>
+                                            </table>
+                                            <button class="btn btn-info" type="submit">Save order</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+<script src="~/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script>
+    $(".delete").click((e) => {
+        var check = confirm("Are you sure ?");
+        if (check) {
+            var id = (e.currentTarget.attributes[2].value);
+            console.log(id);
+            $.ajax({
+                url: "/lecture/delete/" + id,
+                method: "DELETE",
+                success: (result) => {
+                    alert("lecture deleted.");
+                    location.reload();
+                },
+                error: (err) => {
+                    alert("Error.");
+                }
+            });
+        }
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+<script>
+    var editor; // use a global for the submit and return data rendering in the examples
+
+    var fixHelperModified = function (e, tr) {
+        console.log(1);
+        var $originals = tr.children();
+        var $helper = tr.clone();
+        $helper.children().each(function (index) {
+            $(this).width($originals.eq(index).width())
+        });
+        return $helper;
+    },
+        updateIndex = function (e, ui) {
+            $('input.index', ui.item.parent()).each(function (i) {
+                $(this).val(i + 1);
+            });
+        };
+
+    $(".sort tbody").sortable({
+        helper: fixHelperModified,
+        stop: updateIndex
+    }).disableSelection();
+
+
+
+</script>
+
