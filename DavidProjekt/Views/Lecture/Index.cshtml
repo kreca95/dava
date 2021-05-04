@@ -29,51 +29,64 @@
                     <div class="card">
 
                         <div class="card-body">
-                            <a class="btn btn-info" href="/lecture/add/@Model.FirstOrDefault().CourseId">Add lecture</a>
+                            @if (Model.Count > 0)
+                            {
+                                <a class="btn btn-info" href="/lecture/add/@Model.FirstOrDefault().CourseId">Add lecture</a>
+
+                            }
+                            else
+                            {
+                                <a class="btn btn-info" href="/lecture/add/@Context.Request.Path.Value.Split('/').Last()">Add lecture</a>
+
+                            }
                             <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                 <div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row">
                                     <div class="col-sm-12">
-                                        <form action="/lecture/order" method="post">
-                                            <table id="dataTable" class="table table-bordered dataTable table-hover dataTable dtr-inline sort" role="grid" cellpadding="0" cellspacing="0">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="index">Order number</th>
-                                                        <th>Name</th>
-                                                        <th>Image</th>
-                                                        <th>Video duration</th>
-                                                        <th></th>
-                                                        <th></th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @for (int i = 0; i < Model.Count; i++)
-                                                    {
-                                                        <tr class="odd">
-                                                            <td><input class="index" asp-for="@Model[i].OrderNum" /></td>
-                                                            <input asp-for="@Model[i].Id" class="text-hide" />
-                                                            <input asp-for="@Model[i].CourseId" class="text-hide" />
-                                                            <td class="dtr-control sorting_1" tabindex="0">@Model[i].Title</td>
-                                                            @if (!string.IsNullOrEmpty(Model[i].ImageUrl))
-                                                            {
-                                                                <td><a href="/files/@Model[i].ImageUrl" target="_blank">Image</a></td>
-
-                                                            }
-                                                            else
-                                                            {
-                                                                <td><a>No image</a></td>
-
-                                                            }
-                                                            <td>@Model[i].Length</td>
-                                                            <td><a href="" class="delete" data-id="@Model[i].Id">Delete</a></td>
-                                                            <td><a href="/lecture/edit/@Model[i].Id">Edit</a></td>
+                                        @if (Model.Count > 0)
+                                        {
+                                            <form action="/lecture/order" method="post">
+                                                <table id="dataTable" class="table table-bordered dataTable table-hover dataTable dtr-inline sort" role="grid" cellpadding="0" cellspacing="0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="index">Order number</th>
+                                                            <th>Name</th>
+                                                            <th>Image</th>
+                                                            <th>Video duration</th>
+                                                            <th></th>
+                                                            <th></th>
                                                         </tr>
-                                                    }
+                                                    </thead>
+                                                    <tbody>
+                                                        @for (int i = 0; i < Model.Count; i++)
+                                                        {
+                                                            <tr class="odd">
+                                                                <td><input class="index" asp-for="@Model[i].OrderNum" /></td>
+                                                                <input asp-for="@Model[i].Id" class="text-hide" />
+                                                                <input asp-for="@Model[i].CourseId" class="text-hide" />
+                                                                <td class="dtr-control sorting_1" tabindex="0">@Model[i].Title</td>
+                                                                @if (!string.IsNullOrEmpty(Model[i].ImageUrl))
+                                                                {
+                                                                    <td><a href="/files/@Model[i].ImageUrl" target="_blank">Image</a></td>
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td><a>No image</a></td>
+
+                                                                }
+                                                                <td>@Model[i].Length</td>
+                                                                <td><a href="" class="delete" data-id="@Model[i].Id">Delete</a></td>
+                                                                <td><a href="/lecture/edit/@Model[i].Id">Edit</a></td>
+                                                            </tr>
+                                                        }
 
 
-                                                </tbody>
-                                            </table>
-                                            <button class="btn btn-info" type="submit">Save order</button>
-                                        </form>
+                                                    </tbody>
+                                                </table>
+                                                <button class="btn btn-info" type="submit">Save order</button>
+                                            </form>
+
+                                        }
                                     </div>
                                 </div>
                             </div>

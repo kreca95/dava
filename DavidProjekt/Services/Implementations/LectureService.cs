@@ -42,9 +42,19 @@ namespace DavidProjekt.Services.Implementations
 
         public bool Insert(Lecture data)
         {
-            var max = GetAll().Last().OrderNum;
-            max += 1;
-            data.OrderNum = max;
+            var lectues = GetAll();
+
+            if (!lectues.Any())
+            {
+                data.OrderNum = 1;
+            }
+            else
+            {
+                var max = lectues.Last().OrderNum;
+                max += 1;
+                data.OrderNum = max;
+            }
+
             _context.Lectures.Add(data);
             return _context.SaveChanges() > 0;
 

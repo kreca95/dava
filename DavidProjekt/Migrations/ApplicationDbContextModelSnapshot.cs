@@ -4,16 +4,14 @@ using DavidProjekt.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DavidProjekt.Data.Migrations
+namespace DavidProjekt.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210428133625_added isPopular to categories")]
-    partial class addedisPopulartocategories
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +50,7 @@ namespace DavidProjekt.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -60,6 +58,9 @@ namespace DavidProjekt.Data.Migrations
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsPopular")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Length")
                         .HasColumnType("int");
@@ -101,6 +102,12 @@ namespace DavidProjekt.Data.Migrations
                     b.Property<int>("Length")
                         .HasColumnType("int");
 
+                    b.Property<int>("OrderNum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -112,6 +119,21 @@ namespace DavidProjekt.Data.Migrations
                     b.HasIndex("CourseId");
 
                     b.ToTable("Lectures");
+                });
+
+            modelBuilder.Entity("DavidProjekt.Data.Models.Subscription", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "CourseId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Subscriptions");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -144,14 +166,14 @@ namespace DavidProjekt.Data.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "e60aecf9-ec98-4610-86fc-0808f066af09",
+                            ConcurrencyStamp = "af7b0507-7f6e-40cb-b323-ea186120c004",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
-                            ConcurrencyStamp = "4e25c3ea-d1ec-49c3-8a1d-2e14639b4ab4",
+                            ConcurrencyStamp = "bbb64832-96a5-4c75-8936-9a965b247083",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -365,13 +387,13 @@ namespace DavidProjekt.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1b809155-fefd-49ef-b41d-716bbaaf39dc",
+                            ConcurrencyStamp = "bf90bbf1-bfcf-455e-b70c-f17230f8c8bd",
                             Email = "admin@admin.ba",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAELyKDpumliqZe+EpQnWz7jc9sVLjsBhYsEiMdHYuEuqHjKJGkSdJJzf3zCmkBrxGzA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI/qxLrW+6YnSrF4AJ9e0yydKHD8oDYmXaBAQN40oSY30bUpF/Db9dPHVSqE2OOZhA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "787de406-505a-402a-b042-346d507bf1b2",
+                            SecurityStamp = "1024c5fb-1552-41c4-93b7-076a6ac29a6e",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             FirstName = "admin",
@@ -381,13 +403,13 @@ namespace DavidProjekt.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3413639f-8e97-4bc9-ad58-00c971e7d9be",
+                            ConcurrencyStamp = "dfc8d908-3ac2-4602-b8bc-a9962496b43e",
                             Email = "user@user.ba",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEDskzul8qJZBwwnyUHy8x9GtIDOmqc9zQZxlrIXbZPcGQ7vzOL4I5sburqJzgWPBZg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECkNXee9dFf7rWWBzSAKNLg3/NDRkDEwEw0EEz4V1EAkmPM9kPIEQYS7QxRc0N3AvA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4915598a-b81d-4ba2-ad9b-dd0a45da0782",
+                            SecurityStamp = "4b473e3e-5846-48a4-8c85-622a30970f3c",
                             TwoFactorEnabled = false,
                             UserName = "user",
                             FirstName = "user",
@@ -397,13 +419,17 @@ namespace DavidProjekt.Data.Migrations
 
             modelBuilder.Entity("DavidProjekt.Data.Models.Course", b =>
                 {
-                    b.HasOne("DavidProjekt.Data.Models.Category", null)
+                    b.HasOne("DavidProjekt.Data.Models.Category", "Category")
                         .WithMany("Courses")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("DavidProjekt.Data.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Category");
 
                     b.Navigation("User");
                 });
@@ -417,6 +443,25 @@ namespace DavidProjekt.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("DavidProjekt.Data.Models.Subscription", b =>
+                {
+                    b.HasOne("DavidProjekt.Data.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DavidProjekt.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

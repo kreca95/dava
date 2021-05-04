@@ -39,7 +39,9 @@ namespace DavidProjekt.Data
                 Email = "admin@admin.ba",
                 FirstName = "admin",
                 LastName = "admin",
-                PasswordHash = hasher.HashPassword(null, "admin")
+                PasswordHash = hasher.HashPassword(null, "admin"),
+                NormalizedEmail = "ADMIN@ADMIN.BA",
+                NormalizedUserName = "ADMIN"
             };
             builder.Entity<User>().HasData(user);
             var user2 = new User
@@ -49,7 +51,9 @@ namespace DavidProjekt.Data
                 Email = "user@user.ba",
                 FirstName = "user",
                 LastName = "user",
-                PasswordHash = hasher.HashPassword(null, "user")
+                PasswordHash = hasher.HashPassword(null, "user"),
+                NormalizedEmail = "USER@USER.BA",
+                NormalizedUserName = "USER"
             };
             builder.Entity<User>().HasData(user2);
 

@@ -15,6 +15,7 @@ namespace DavidProjekt.Models
         public string Tags { get; set; }
         public string ImageUrl { get; set; }
         public string Category { get; set; }
+        public bool Subscribed { get; set; }
 
     }
 }

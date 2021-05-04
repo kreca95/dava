@@ -21,21 +21,31 @@ namespace DavidProjekt.Controllers
     {
         private readonly ILectureService _lectureService;
         private readonly ICategoryService _categoryService;
+        private readonly ISubscriptionService _subscriptionService;
         private readonly UserManager<User> _userManager;
 
-        public LectureController(ILectureService lectureService, UserManager<User> userManager, ICategoryService categoryService)
+        public LectureController(ILectureService lectureService, UserManager<User> userManager, ICategoryService categoryService, ISubscriptionService subscriptionService)
         {
             _lectureService = lectureService;
             _userManager = userManager;
             _categoryService = categoryService;
+            _subscriptionService = subscriptionService;
         }
         [HttpGet("{courseId}")]
         public IActionResult Index(int courseId)
         {
             var courses = _lectureService.GetLecturesByCourse(courseId);
             var model = new List<LectureViewModel>();
+
             foreach (var item in courses)
             {
+                bool subbed = false;
+                var userid = _userManager.GetUserAsync(HttpContext.User).Result.Id;
+                var sub = _subscriptionService.GetUserSubscriptions(new Subscription { UserId = userid, CourseId = item.CourseId });
+                if (sub != null)
+                {
+                    subbed = true;
+                }
                 model.Add(new LectureViewModel { Id = item.Id, CourseId = item.CourseId, CourseName = item.Course.Title, Title = item.Title, ImageUrl = item.ImageUrl, OrderNum = item.OrderNum, Length = item.Length, Description = item.Description, Url = item.Url });
             }
 

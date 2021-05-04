@@ -63,7 +63,15 @@
                                                 <!-- <span>Open</span> -->
                                             </div>
                                             <div class="list-caption">
-                                                <h3>@item.Name <a href="/subscription/@item.Id" class="btn">Subscribe</a></h3>
+                                                @if (!item.Subscribed)
+                                                {
+                                                    <h3>@item.Name <a class="btn sub" data-id="@item.Id">Subscribe</a></h3>
+                                                }
+                                                else
+                                                {
+                                                    <h3>@item.Name <a class="btn btn-default">Subscribed</a> </h3>
+
+                                                }
                                                 <p>@item.Description</p>
                                                 <div class="list-footer">
                                                     <ul>
@@ -87,3 +95,9 @@
         </div>
     </div>
 </div>
+<script src="~/assets/js/vendor/jquery-1.12.4.min.js"></script>
+<script>
+    $(".sub").click((e) => {
+        console.log(e);
+    });
+</script>

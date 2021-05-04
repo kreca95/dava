@@ -17,13 +17,15 @@ namespace DavidProjekt.Controllers
     public class CourseController : Controller
     {
         private readonly ICourseService _courseService;
+        private readonly ISubscriptionService _subscriptionService;
         private readonly ICategoryService _categoryService;
         private readonly UserManager<User> _userManager;
-        public CourseController(ICourseService courseService, UserManager<User> userManager, ICategoryService categoryService)
+        public CourseController(ICourseService courseService, UserManager<User> userManager, ICategoryService categoryService, ISubscriptionService subscriptionService)
         {
             _courseService = courseService;
             _userManager = userManager;
             _categoryService = categoryService;
+            _subscriptionService = subscriptionService;
         }
 
         [HttpGet("details/{id}")]
@@ -231,7 +233,17 @@ namespace DavidProjekt.Controllers
 
             foreach (var item in courses)
             {
-                coursesViewModel.Add(new CourseViewModel { Category = item.Category.Name, Name = item.Title, Description = item.Description, Duration = item.Length, Id = item.Id, ImageUrl = item.ImageUrl, Tags = item.Tags, VideoCount = item.Lectures.Count });
+                bool subb = false;
+
+                var userId = _userManager.GetUserAsync(HttpContext.User).Result.Id;
+
+                var sub = _subscriptionService.GetUserSubscriptions(new Subscription { CourseId = item.Id, UserId = userId });
+                if (sub != null)
+                {
+                    subb = true;
+                }
+
+                coursesViewModel.Add(new CourseViewModel { Subscribed = subb, Category = item.Category.Name, Name = item.Title, Description = item.Description, Duration = item.Length, Id = item.Id, ImageUrl = item.ImageUrl, Tags = item.Tags, VideoCount = item.Lectures.Count });
             }
             return coursesViewModel;
         }

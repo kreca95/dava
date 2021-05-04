@@ -33,14 +33,22 @@ namespace DavidProjekt.Controllers
         [HttpGet("{courseid}")]
         public IActionResult Subscribe(int courseid)
         {
-            var userId = _userManager.GetUserAsync(HttpContext.User).Result.Id;
-            var sub = new Subscription { UserId = userId, CourseId = courseid };
-            var check = _subscriptionService.Insert(sub);
-            if (check)
+            try
             {
-                return Ok();
+                var userId = _userManager.GetUserAsync(HttpContext.User).Result.Id;
+                var sub = new Subscription { UserId = userId, CourseId = courseid };
+                var check = _subscriptionService.Insert(sub);
+                if (check)
+                {
+                    return Ok();
+                }
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception)
+            {
+                return BadRequest();
+                throw;
+            }
         }
     }
 }
