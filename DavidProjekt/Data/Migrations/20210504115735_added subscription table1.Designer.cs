@@ -4,14 +4,16 @@ using DavidProjekt.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DavidProjekt.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210504115735_added subscription table1")]
+    partial class addedsubscriptiontable1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,15 +125,22 @@ namespace DavidProjekt.Data.Migrations
 
             modelBuilder.Entity("DavidProjekt.Data.Models.Subscription", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId", "CourseId");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Subscriptions");
                 });
@@ -166,14 +175,14 @@ namespace DavidProjekt.Data.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "8bdf809b-b882-44bc-a3fe-0efc25868f36",
+                            ConcurrencyStamp = "2a6f1601-74c7-466d-918e-5cca6637d4d5",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
-                            ConcurrencyStamp = "1e7ef4da-368a-4c14-b921-5229161fedeb",
+                            ConcurrencyStamp = "d3258e8a-9723-47e7-a08f-b61b6d5d9bd9",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -387,13 +396,13 @@ namespace DavidProjekt.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7ae1f5a8-08d6-4d25-becf-dab4a2769c01",
+                            ConcurrencyStamp = "ca8c0d26-7f0f-4eba-98d1-b737179d3812",
                             Email = "admin@admin.ba",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEPHuRW+RRmLELuJiMbFGjOpanfUksmglaWuLEYWhxpoPHqSxSkrXemvxgj2feRhTlQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAoUmr97vdN1Nqk4lP+20YnK2CBxBQU9FO077BIq4lGQ7me3IqvnHfExcyhgwn55Kw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3b8146b6-43fa-428b-bd3b-f316bc574e6e",
+                            SecurityStamp = "fd28e42d-70fc-4d1b-854e-09ab4daa832e",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             FirstName = "admin",
@@ -403,13 +412,13 @@ namespace DavidProjekt.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "256dc4a2-eeb4-4b66-990a-d071d1b7da7a",
+                            ConcurrencyStamp = "40dd18ef-1c6c-4a4b-b576-2cc93d5d8910",
                             Email = "user@user.ba",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEM3zCQSKvI6i8qvCkfXlDjO1wABll7qPlrb51br81pQEAe2YNyylQRt5lWhwg061Ig==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMnEgIintkyoapFiHS2Tvqq01u8YyAQxQh7xaWhHQQFrBycfeC4t3enKdrOtGt+sUw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "304b5e0f-1f62-4ed6-885b-a23b1eed0d18",
+                            SecurityStamp = "d15f1e82-869f-46c7-b336-90d9e5302dce",
                             TwoFactorEnabled = false,
                             UserName = "user",
                             FirstName = "user",
@@ -455,9 +464,7 @@ namespace DavidProjekt.Data.Migrations
 
                     b.HasOne("DavidProjekt.Data.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Course");
 

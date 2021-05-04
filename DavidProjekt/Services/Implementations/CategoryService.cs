@@ -23,7 +23,6 @@ namespace DavidProjekt.Services.Implementations
             _context.Categories.Remove(data);
             return _context.SaveChanges() > 0;
         }
-
         public Category Get(int id)
         {
             return _context.Categories.Include(x => x.Courses).ThenInclude(x => x.Lectures).FirstOrDefault(x => x.Id == id);

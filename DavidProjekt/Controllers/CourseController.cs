@@ -2,6 +2,7 @@
 using DavidProjekt.Helpers;
 using DavidProjekt.Models;
 using DavidProjekt.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 namespace DavidProjekt.Controllers
 {
     [Route("[controller]")]
+
     public class CourseController : Controller
     {
         private readonly ICourseService _courseService;
@@ -24,7 +26,17 @@ namespace DavidProjekt.Controllers
             _categoryService = categoryService;
         }
 
+        [HttpGet("details/{id}")]
+        public IActionResult Details(int id)
+        {
+            var course = _courseService.Get(id);
+
+            return View(course);
+        }
+
         [HttpGet]
+        [Authorize(Roles = "admin")]
+
         public IActionResult Index()
         {
             var courses = _courseService.GetAll();
@@ -47,6 +59,8 @@ namespace DavidProjekt.Controllers
         }
 
         [HttpGet("add")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult Add()
         {
             var categories = _categoryService.GetAll();
@@ -64,6 +78,8 @@ namespace DavidProjekt.Controllers
         }
 
         [HttpPost("add")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult Add(CourseAddViewModel model)
         {
             var user = _userManager.GetUserAsync(HttpContext.User).Result;
@@ -85,6 +101,8 @@ namespace DavidProjekt.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult Delete(int id)
         {
             if (id == 0)
@@ -103,6 +121,8 @@ namespace DavidProjekt.Controllers
         }
 
         [HttpGet("edit/{id}")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult Edit(int id)
         {
             if (id == 0)
@@ -132,6 +152,8 @@ namespace DavidProjekt.Controllers
         }
 
         [HttpPost("edit")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult Edit(CourseEditViewModel model)
         {
             var course = new Course
@@ -161,6 +183,8 @@ namespace DavidProjekt.Controllers
         }
 
         [HttpGet("search")]
+        [AllowAnonymous]
+
         public IActionResult Search(CourseSearchViewModel model)
         {
             List<CourseViewModel> coursesViewModel = new List<CourseViewModel>();

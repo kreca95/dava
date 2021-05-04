@@ -173,3 +173,4 @@ C:\Users\kresi\Source\Repos\DavidProjekt\DavidProjekt\bin\Debug\net5.0\Microsoft
 C:\Users\kresi\Source\Repos\DavidProjekt\DavidProjekt\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\kresi\Source\Repos\DavidProjekt\DavidProjekt\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
 C:\Users\kresi\Source\Repos\DavidProjekt\DavidProjekt\obj\Debug\net5.0\Razor\Views\Course\Search.cshtml.g.cs
+C:\Users\kresi\Source\Repos\DavidProjekt\DavidProjekt\obj\Debug\net5.0\Razor\Views\Course\Details.cshtml.g.cs

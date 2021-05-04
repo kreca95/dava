@@ -2,6 +2,7 @@
 using DavidProjekt.Helpers;
 using DavidProjekt.Models;
 using DavidProjekt.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,6 +15,8 @@ using System.Xml;
 namespace DavidProjekt.Controllers
 {
     [Route("[controller]")]
+    [Authorize(Roles = "admin")]
+
     public class LectureController : Controller
     {
         private readonly ILectureService _lectureService;

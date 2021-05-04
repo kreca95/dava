@@ -2,6 +2,7 @@
 using DavidProjekt.Helpers;
 using DavidProjekt.Models;
 using DavidProjekt.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace DavidProjekt.Controllers
 {
     [Route("[controller]")]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -19,7 +21,7 @@ namespace DavidProjekt.Controllers
         {
             _categoryService = categoryService;
         }
-
+        [Authorize(Roles ="admin")]
         public IActionResult Index()
         {
 
@@ -32,12 +34,16 @@ namespace DavidProjekt.Controllers
             return View(model);
 
         }
+        [Authorize(Roles = "admin")]
+
         [HttpGet("add")]
         public IActionResult Add()
         {
             return View();
         }
         [HttpPost("add")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult Add(CategoryAddViewModel model)
         {
             var category = new Category
@@ -56,6 +62,8 @@ namespace DavidProjekt.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult Delete(int id)
         {
             bool check = false;
@@ -71,6 +79,8 @@ namespace DavidProjekt.Controllers
         }
 
         [HttpGet("edit/{id}")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult Edit(int id)
         {
             if (id != 0)
@@ -89,6 +99,8 @@ namespace DavidProjekt.Controllers
             return View();
         }
         [HttpPost("edit")]
+        [Authorize(Roles = "admin")]
+
         public IActionResult Edit(CategoryEditViewModel model)
         {
             if (model == null)

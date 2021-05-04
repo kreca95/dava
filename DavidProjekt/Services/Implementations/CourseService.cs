@@ -26,7 +26,7 @@ namespace DavidProjekt.Services.Implementations
 
         public Course Get(int id)
         {
-            return _context.Courses.Find(id);
+            return _context.Courses.Include(x => x.Lectures).FirstOrDefault(x => x.Id == id);
         }
 
         public List<Course> GetAll()

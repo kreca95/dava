@@ -37,6 +37,7 @@ namespace DavidProjekt
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ILectureService, LectureService>();
+            services.AddScoped<ISubscriptionService, SubscriptionService>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                .AddCookie(options =>
                {

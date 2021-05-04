@@ -4,14 +4,16 @@ using DavidProjekt.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DavidProjekt.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210504125721_composite key subscription")]
+    partial class compositekeysubscription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,14 +168,14 @@ namespace DavidProjekt.Data.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "8bdf809b-b882-44bc-a3fe-0efc25868f36",
+                            ConcurrencyStamp = "82aaceff-5242-4851-a965-b8512d7733be",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
-                            ConcurrencyStamp = "1e7ef4da-368a-4c14-b921-5229161fedeb",
+                            ConcurrencyStamp = "869f4e07-c7ac-4f44-86cd-efa7895a296b",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -387,13 +389,13 @@ namespace DavidProjekt.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7ae1f5a8-08d6-4d25-becf-dab4a2769c01",
+                            ConcurrencyStamp = "6e2d79d5-6975-4a8b-bb7a-0e7588a4bb6b",
                             Email = "admin@admin.ba",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEPHuRW+RRmLELuJiMbFGjOpanfUksmglaWuLEYWhxpoPHqSxSkrXemvxgj2feRhTlQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPLJj7IDBzF93xxTzEh0mNNbIBH2QEEeU8ndnFgSpGJG9OlNJT6kU7ux3+lUc2CFPw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3b8146b6-43fa-428b-bd3b-f316bc574e6e",
+                            SecurityStamp = "bfb3c83e-9fb4-4c97-bc8c-87bc20184a34",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             FirstName = "admin",
@@ -403,13 +405,13 @@ namespace DavidProjekt.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "256dc4a2-eeb4-4b66-990a-d071d1b7da7a",
+                            ConcurrencyStamp = "69f23f44-642f-43c3-8b33-daa1d7bb1bbe",
                             Email = "user@user.ba",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEM3zCQSKvI6i8qvCkfXlDjO1wABll7qPlrb51br81pQEAe2YNyylQRt5lWhwg061Ig==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENuqB1t4vF7zZ+HiTrgKkBzz9C6TWAalIavYUpGlXP+FsT9AD1bxfhf+zC4Ot5If8A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "304b5e0f-1f62-4ed6-885b-a23b1eed0d18",
+                            SecurityStamp = "54900d2f-3e83-483c-8541-6bab80edb6c5",
                             TwoFactorEnabled = false,
                             UserName = "user",
                             FirstName = "user",

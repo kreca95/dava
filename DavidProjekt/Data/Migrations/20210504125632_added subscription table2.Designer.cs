@@ -4,14 +4,16 @@ using DavidProjekt.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DavidProjekt.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210504125632_added subscription table2")]
+    partial class addedsubscriptiontable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,6 +131,9 @@ namespace DavidProjekt.Data.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId", "CourseId");
 
                     b.HasIndex("CourseId");
@@ -166,14 +171,14 @@ namespace DavidProjekt.Data.Migrations
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7210",
-                            ConcurrencyStamp = "8bdf809b-b882-44bc-a3fe-0efc25868f36",
+                            ConcurrencyStamp = "201a7187-a880-4703-bfb5-7a58de45595d",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "2c5e174e-3b0e-446f-86af-483d56fd7211",
-                            ConcurrencyStamp = "1e7ef4da-368a-4c14-b921-5229161fedeb",
+                            ConcurrencyStamp = "d16e204c-2b46-4c09-a344-0ddb980aef11",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -387,13 +392,13 @@ namespace DavidProjekt.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7ae1f5a8-08d6-4d25-becf-dab4a2769c01",
+                            ConcurrencyStamp = "2e7a5f54-2bd7-4fe3-9a75-3e9a055d7a11",
                             Email = "admin@admin.ba",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEPHuRW+RRmLELuJiMbFGjOpanfUksmglaWuLEYWhxpoPHqSxSkrXemvxgj2feRhTlQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPXGb90cyMpN8zmNjaw+vT0Z5D+biMh7pNkJlZERo/PU+pxbU+CWHghZIYxNYJWAWA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3b8146b6-43fa-428b-bd3b-f316bc574e6e",
+                            SecurityStamp = "af57cb08-c606-42bd-ba1d-b6d8743cb5cd",
                             TwoFactorEnabled = false,
                             UserName = "admin",
                             FirstName = "admin",
@@ -403,13 +408,13 @@ namespace DavidProjekt.Data.Migrations
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb0",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "256dc4a2-eeb4-4b66-990a-d071d1b7da7a",
+                            ConcurrencyStamp = "6fb14cf9-da31-4c97-a4ce-b87edaf93a42",
                             Email = "user@user.ba",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEM3zCQSKvI6i8qvCkfXlDjO1wABll7qPlrb51br81pQEAe2YNyylQRt5lWhwg061Ig==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPc64H+afgITQrSCY2hbgXfzFpoUv5QfUurhwlxdOjAerKT71bSIZasPAY8lcRmhqA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "304b5e0f-1f62-4ed6-885b-a23b1eed0d18",
+                            SecurityStamp = "9421938b-3d5b-4bc7-8b5f-e17fc1e96c20",
                             TwoFactorEnabled = false,
                             UserName = "user",
                             FirstName = "user",

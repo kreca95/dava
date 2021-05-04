@@ -18,10 +18,12 @@ namespace DavidProjekt.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Subscription>().HasKey(c => new { c.UserId, c.CourseId });
             IdentityRole role = new IdentityRole { Id = "2c5e174e-3b0e-446f-86af-483d56fd7210", Name = "admin", NormalizedName = "ADMIN" };
             IdentityRole userRole = new IdentityRole { Id = "2c5e174e-3b0e-446f-86af-483d56fd7211", Name = "user", NormalizedName = "USER" };
 

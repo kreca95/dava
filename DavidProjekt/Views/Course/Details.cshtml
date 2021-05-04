@@ -1,0 +1,67 @@
+﻿@model DavidProjekt.Data.Models.Course
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .main-header {
+        background: #010E21;
+    }
+</style>
+<div class="listing-area pt-120 pb-120">
+    <div class="container">
+        <div class="row">
+            <!-- Left content -->
+            <!-- Right content -->
+            <div class="col-md-12">
+                @if (Model != null)
+                {
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="count mb-35">
+                                <span>@Model.Lectures.Count found</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- listing Details Stat-->
+                <div class="listing-details-area">
+                    <div class="container">
+                        <div class="row">
+                            @if (Model != null)
+                            {
+                                @foreach (var item in Model.Lectures)
+                                {
+                                    <div class="col-lg-6 ">
+                                        <div class="single-listing mb-30">
+                                            <div class="list-img">
+                                                <img src="/files/@item.ImageUrl" alt="">
+                                                <!-- <span>Open</span> -->
+                                            </div>
+                                            <div class="list-caption">
+                                                <h3><a href="@item.Url" class="btn btn-info" target="_blank">Part @item.OrderNum  @item.Title</a></h3>
+                                                <p>@item.Description</p>
+                                                @*<div class="list-footer">
+                                                        <ul>
+                                                            <li>Video count: @item.Course.</li>
+                                                            <li>@item.Tags</li>
+                                                        </ul>
+                                                    </div>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <!-- listing Details End -->
+
+            </div>
+        </div>
+    </div>
+</div>

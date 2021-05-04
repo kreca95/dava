@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DavidProjekt.Services.Interfaces
 {
-    public interface ISubscriptionService:IReadService<Subscription>,IWriteService<Subscription>
+    public interface ISubscriptionService : IReadService<Subscription>, IWriteService<Subscription>
     {
-
+        List<Subscription> GetUserSubscriptions(Subscription subscription);
     }
 }
