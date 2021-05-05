@@ -1,5 +1,6 @@
 ﻿using DavidProjekt.Data;
 using DavidProjekt.Data.Models;
+using DavidProjekt.Models;
 using DavidProjekt.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -32,6 +33,20 @@ namespace DavidProjekt.Services.Implementations
         public List<Course> GetAll()
         {
             return _context.Courses.Include(x => x.Lectures).Include(x => x.Category).ToList();
+        }
+
+        public List<Course> GetMostPopularCourses()
+        {
+            var result = _context.Subscriptions.GroupBy(q => q.CourseId)
+                  .OrderByDescending(gp => gp.Count())
+                  .Take(5)
+                  .Select(g => new MostPopularCoursesViewModel { CourseId = g.Key, Value_Occurence = g.Count() }).ToList();
+            List<Course> courses = new List<Course>();
+            foreach (var item in result)
+            {
+                courses.Add(Get(item.CourseId));
+            }
+            return courses;
         }
 
         public bool Insert(Course data)

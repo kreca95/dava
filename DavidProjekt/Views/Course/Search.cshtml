@@ -98,6 +98,18 @@
 <script src="~/assets/js/vendor/jquery-1.12.4.min.js"></script>
 <script>
     $(".sub").click((e) => {
-        console.log(e);
+        var id = e.target.dataset.id;
+        $.ajax({
+            method: "get",
+            url: "/subscription/" + id,
+            success: (data) => {
+                alert("Subscribed");
+                location.reload();
+            },
+            error: (e) => {
+                alert("Error");
+            }
+
+        })
     });
 </script>

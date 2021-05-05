@@ -42,10 +42,10 @@
                                     <nav>
                                         <ul id="navigation">
                                             <li><a href="/">Home</a></li>
-                                            <li><a href="about.html">About</a></li>
+                                            <li><a href="/subscription">Subscribed courses</a></li>
                                             <li><a href="/course/search">Courses</a></li>
-                                            <li><a href="listing.html">Listing</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            @*<li><a href="listing.html">Listing</a></li>*@
+                                            @*<li><a href="contact.html">Contact</a></li>*@
                                             @if (User.IsInRole("admin") || User.IsInRole("ADMIN"))
                                             {
                                                 <li class="add-list"><a href="/course"><i class="ti-plus"></i> admin Panel</a></li>

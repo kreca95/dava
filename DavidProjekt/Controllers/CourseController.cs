@@ -230,20 +230,28 @@ namespace DavidProjekt.Controllers
         private List<CourseViewModel> Mapp(List<Course> courses)
         {
             List<CourseViewModel> coursesViewModel = new List<CourseViewModel>();
-
-            foreach (var item in courses)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
-                bool subb = false;
-
                 var userId = _userManager.GetUserAsync(HttpContext.User).Result.Id;
 
-                var sub = _subscriptionService.GetUserSubscriptions(new Subscription { CourseId = item.Id, UserId = userId });
-                if (sub != null)
+                foreach (var item in courses)
                 {
-                    subb = true;
-                }
+                    bool subb = false;
 
-                coursesViewModel.Add(new CourseViewModel { Subscribed = subb, Category = item.Category.Name, Name = item.Title, Description = item.Description, Duration = item.Length, Id = item.Id, ImageUrl = item.ImageUrl, Tags = item.Tags, VideoCount = item.Lectures.Count });
+
+                    var sub = _subscriptionService.GetUserSubscriptions(new Subscription { CourseId = item.Id, UserId = userId });
+                    if (sub.Count > 0)
+                    {
+                        subb = true;
+                    }
+
+                    coursesViewModel.Add(new CourseViewModel { Subscribed = subb, Category = item.Category.Name, Name = item.Title, Description = item.Description, Duration = item.Length, Id = item.Id, ImageUrl = item.ImageUrl, Tags = item.Tags, VideoCount = item.Lectures.Count });
+                }
+                return coursesViewModel;
+            }
+            foreach (var item in courses)
+            {
+                coursesViewModel.Add(new CourseViewModel { Category = item.Category.Name, Name = item.Title, Description = item.Description, Duration = item.Length, Id = item.Id, ImageUrl = item.ImageUrl, Tags = item.Tags, VideoCount = item.Lectures.Count });
             }
             return coursesViewModel;
         }

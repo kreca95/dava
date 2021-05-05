@@ -8,6 +8,6 @@ namespace DavidProjekt.Services.Interfaces
 {
     public interface ICourseService : IReadService<Course>, IWriteService<Course>
     {
-
+        List<Course> GetMostPopularCourses();
     }
 }

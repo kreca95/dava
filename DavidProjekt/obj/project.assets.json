@@ -7589,19 +7589,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kresi\\.nuget\\packages\\": {}
+    "C:\\Users\\cornet1\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kresi\\Source\\Repos\\DavidProjekt\\DavidProjekt\\DavidProjekt.csproj",
+      "projectUniqueName": "C:\\Users\\cornet1\\Source\\Repos\\dava\\DavidProjekt\\DavidProjekt.csproj",
       "projectName": "DavidProjekt",
-      "projectPath": "C:\\Users\\kresi\\Source\\Repos\\DavidProjekt\\DavidProjekt\\DavidProjekt.csproj",
-      "packagesPath": "C:\\Users\\kresi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kresi\\Source\\Repos\\DavidProjekt\\DavidProjekt\\obj\\",
+      "projectPath": "C:\\Users\\cornet1\\Source\\Repos\\dava\\DavidProjekt\\DavidProjekt.csproj",
+      "packagesPath": "C:\\Users\\cornet1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\cornet1\\Source\\Repos\\dava\\DavidProjekt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kresi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\cornet1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -7674,7 +7674,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

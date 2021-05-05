@@ -9,6 +9,8 @@ namespace DavidProjekt.Models
     {
         public int CategoryId { get; set; }
         public List<CategoryViewModel> Categories { get; set; }
+        public List<CoursesViewModel> Courses { get; set; }
+
         public string Tags { get; set; }
 
     }
