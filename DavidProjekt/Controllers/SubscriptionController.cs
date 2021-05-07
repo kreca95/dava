@@ -50,5 +50,21 @@ namespace DavidProjekt.Controllers
                 throw;
             }
         }
+
+        [HttpPost("unsub/{courseid}")]
+        public IActionResult UnSubscribe(int courseid)
+        {
+            if (courseid == 0)
+            {
+                return BadRequest();
+            }
+            var user = _userManager.GetUserAsync(HttpContext.User).Result.Id;
+            var check = _subscriptionService.Delete(new Subscription { CourseId = courseid, UserId = user });
+            if (check)
+            {
+                return View("index");
+            }
+            return BadRequest();
+        }
     }
 }

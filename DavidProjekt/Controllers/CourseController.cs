@@ -32,7 +32,7 @@ namespace DavidProjekt.Controllers
         public IActionResult Details(int id)
         {
             var course = _courseService.Get(id);
-
+            course.Lectures = course.Lectures.OrderBy(x => x.OrderNum).ToList();
             return View(course);
         }
 
