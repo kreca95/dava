@@ -41,6 +41,7 @@ namespace DavidProjekt.Services.Implementations
                 return _context.Subscriptions
                     .Where(x => x.UserId == subscription.UserId && x.CourseId == subscription.CourseId)
                     .Include(x => x.Course)
+                        .ThenInclude(x=> x.Lectures)
                     .Include(x => x.User)
                     .ToList();
             }
@@ -48,7 +49,8 @@ namespace DavidProjekt.Services.Implementations
             {
                 return _context.Subscriptions
                         .Where(x => x.CourseId == subscription.CourseId)
-                        .Include(x => x.Course)
+                        .Include(x => x.Course).ThenInclude(x => x.Lectures)
+
                         .Include(x => x.User)
                         .ToList();
             }
@@ -56,7 +58,8 @@ namespace DavidProjekt.Services.Implementations
             {
                 return _context.Subscriptions
                         .Where(x => x.UserId == subscription.UserId)
-                        .Include(x => x.Course)
+                        .Include(x => x.Course).ThenInclude(x => x.Lectures)
+
                         .Include(x => x.User)
                         .ToList();
             }

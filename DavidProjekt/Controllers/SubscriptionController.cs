@@ -27,7 +27,7 @@ namespace DavidProjekt.Controllers
         {
             var userId = _userManager.GetUserAsync(HttpContext.User).Result.Id;
             var sub = _subscriptionService.GetUserSubscriptions(new Subscription { UserId = userId });
-            return View();
+            return View(sub);
         }
 
         [HttpGet("{courseid}")]

@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="count mb-35">
-                                <span>@Model.Lectures.Count found</span>
+                                <span>@Model.Title videos found: @Model.Lectures.Count</span>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                                                 <!-- <span>Open</span> -->
                                             </div>
                                             <div class="list-caption">
-                                                <h3><a href="@item.Url" class="btn btn-info" target="_blank">Part @item.OrderNum  @item.Title</a></h3>
+                                                <h3><a href="@item.Url" class="btn btn-info" target="_blank"> @item.Title</a></h3>
                                                 <p>@item.Description</p>
                                                 @*<div class="list-footer">
                                                         <ul>
