@@ -9,5 +9,7 @@ namespace DavidProjekt.Services.Interfaces
     public interface ISubscriptionService : IReadService<Subscription>, IWriteService<Subscription>
     {
         List<Subscription> GetUserSubscriptions(Subscription subscription);
+        bool IsSubscribed(int courseId, string userId);
+
     }
 }

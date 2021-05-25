@@ -50,7 +50,7 @@ namespace DavidProjekt.Services.Implementations
             }
             else
             {
-                var max = lectues.Last().OrderNum;
+                var max = lectues.Where(x => x.CourseId == data.CourseId).Last().OrderNum;
                 max += 1;
                 data.OrderNum = max;
             }

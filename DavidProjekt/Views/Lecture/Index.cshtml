@@ -115,10 +115,12 @@
                 url: "/lecture/delete/" + id,
                 method: "DELETE",
                 success: (result) => {
+                    console.log(result);
                     alert("lecture deleted.");
                     location.reload();
                 },
                 error: (err) => {
+                    console.log(err);
                     alert("Error.");
                 }
             });

@@ -61,6 +61,8 @@ namespace DavidProjekt.Services.Implementations
             return _context.SaveChanges() > 0;
         }
 
+
+
         public bool Update(Course data)
         {
             _context.Courses.Update(data);

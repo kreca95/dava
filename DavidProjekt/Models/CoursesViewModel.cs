@@ -14,6 +14,8 @@ namespace DavidProjekt.Models
         public string Tags { get; set; }
         public string ImageUrl { get; set; }
         public bool IsPopular { get; set; }
-        
+        public bool IsSubbed { get; set; }
+
+
     }
 }

@@ -147,8 +147,10 @@ namespace DavidProjekt.Controllers
                 Tags = course.Tags,
                 Title = course.Title,
                 CategoryName = course.Category.Name,
-                Description = course.Description
+                Description = course.Description,
+                IsPopular=course.IsPopular
             };
+
 
             return View(model);
         }
@@ -158,24 +160,23 @@ namespace DavidProjekt.Controllers
 
         public IActionResult Edit(CourseEditViewModel model)
         {
-            var course = new Course
-            {
-                Id = model.Id,
-                IsPopular = model.IsPopular,
-                Description = model.Description,
-                Tags = model.Tags,
-                Title = model.Title,
-                CategoryId = model.CategoryId
-            };
+            var oldCourse = _courseService.Get(model.Id);
+
+            oldCourse.IsPopular = model.IsPopular;
+            oldCourse.Description = model.Description;
+            oldCourse.Tags = model.Tags;
+            oldCourse.Title = model.Title;
+            oldCourse.CategoryId = model.CategoryId;
+
             if (model.CategoryId != 0)
             {
-                course.CategoryId = model.CategoryId;
+                oldCourse.CategoryId = model.CategoryId;
             }
             if (model.FileResource != null)
             {
-                course.ImageUrl = UploadFile.Upload(model.FileResource);
+                oldCourse.ImageUrl = UploadFile.Upload(model.FileResource);
             }
-            var check = _courseService.Update(course);
+            var check = _courseService.Update(oldCourse);
 
             if (check)
             {

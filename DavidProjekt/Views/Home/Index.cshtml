@@ -60,7 +60,19 @@
                             </div>
                             <div class="location-details">
                                 <p>@item.Title</p>
-                                <a  data-id="@item.Id" class="location-btn sub"> <i class="ti-plus"></i> Subscribe</a>
+                                @if (Context.User.Identity.IsAuthenticated)
+                                {
+                                    if (item.IsSubbed)
+                                    {
+                                        <a href="/course/details/@item.Id" class="location-btn"> <i class="ti-plus"></i> Open</a>
+
+                                    }
+                                    else
+                                    {
+                                        <a data-id="@item.Id" class="location-btn sub"> <i class="ti-plus"></i> Subscribe</a>
+
+                                    }
+                                }
                             </div>
                         </div>
                     </div>
@@ -123,7 +135,7 @@
             </div>
         </div>
     </div>
-    
+
 
 </main>
 <footer>

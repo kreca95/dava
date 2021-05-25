@@ -161,5 +161,16 @@ namespace DavidProjekt.Controllers
             return Redirect("/lecture/" + models.FirstOrDefault().CourseId);
         }
 
+        [HttpDelete("delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var check=_lectureService.Delete(new Lecture { Id = id });
+            if (check)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
     }
 }

@@ -17,7 +17,10 @@ namespace DavidProjekt.Services.Implementations
         {
             _context = context;
         }
-
+        public bool IsSubscribed(int courseId, string userId = null)
+        {
+            return _context.Subscriptions.Any(x => x.CourseId == courseId && x.UserId == userId);
+        }
         public bool Delete(Subscription data)
         {
             _context.Subscriptions.Remove(data);
@@ -41,7 +44,7 @@ namespace DavidProjekt.Services.Implementations
                 return _context.Subscriptions
                     .Where(x => x.UserId == subscription.UserId && x.CourseId == subscription.CourseId)
                     .Include(x => x.Course)
-                        .ThenInclude(x=> x.Lectures)
+                        .ThenInclude(x => x.Lectures)
                     .Include(x => x.User)
                     .ToList();
             }
